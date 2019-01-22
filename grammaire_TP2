@@ -1,0 +1,36 @@
+grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+
+generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+
+Model: 
+	'Langage' langage=Langage','
+	'ModelType' modeltype=ModelType','
+	'Donnees' donnees=Donnees','
+	'VariablePred' varPred=VariablePredictive','
+	'VariableExpl' varExpl=VariableExplicative','
+	'Score' err=Eval ','
+;
+
+enum Langage:
+	R='R'| PYTHON='Python'|JAVA='Java';
+
+enum ModelType:
+	SVM='SVM'| FOREST = 'Forest';
+
+Donnees:
+	 STRING;
+
+VariablePredictive :
+	{Variableredictive} (varPred?=INT? ',');
+
+VariableExplicative:
+	'variableExplicatives' varExpls+=varExpl+;
+	
+varExpl:
+	INT;
+
+Eval:
+	err+=EvalVocab+;
+	
+enum EvalVocab:
+		PRECISION='Precision'|RECALL='Recall'|FSCORE='F1Score';
